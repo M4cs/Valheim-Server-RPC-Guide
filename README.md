@@ -136,7 +136,7 @@ public static class GameStartPatch {
 }
 ```
 
-For the **Client** projct, we can patch all the functions we created.
+For the **Client** project, we can patch all the functions we created.
 
 ```cs
 [HarmonyPatch(typeof(Game), "Start")]
