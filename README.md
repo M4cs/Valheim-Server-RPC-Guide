@@ -63,7 +63,7 @@ public static void RPC_RequestServerAnnouncement(long sender, ZPackage pkg)
                 if (!msg.Equals("I hate you"))
                 { // Example of validating the string.
                     pkg.SetPos(0); // Reset the position of our cursor so the client's can re-read the package.
-                    ZRoutedRpc.instance.InvokeRoutedRPC(0L, "EventServerAnnouncement", new object[] { pkg }); // Send our Event to all Clients.
+                    ZRoutedRpc.instance.InvokeRoutedRPC(0L, "EventServerAnnouncement", new object[] { pkg }); // Send our Event to all Clients. 0L specifies that it will be sent to everybody
                 }
                 else
                 {
@@ -81,7 +81,7 @@ public static void RPC_RequestServerAnnouncement(long sender, ZPackage pkg)
 }
 ```
 
-This will give us a basic server validator and allow us to send the events to the client whether it's completing the request, or sending them an error. However! Since we call `0L` for the target from our server, we need to create a Mock client handler function for the server, but we will just make that an empty return. For consistency we will name this the same as our Client RPC function that we will make next! Add a function in the same **Server** `RPC` class and name it `RPC_EventServerAnnouncement`.
+This will give us a basic server validator and allow us to send the events to the client whether it's completing the request, or sending them an error. `0L` as our target makes our RPC message send to all clients. However! Since we call `0L` for the target from our server, we need to create a Mock client handler function for the server, but we will just make that an empty return. For consistency we will name this the same as our Client RPC function that we will make next! Add a function in the same **Server** `RPC` class and name it `RPC_EventServerAnnouncement`.
 
 ```cs
 public static void RPC_EventServerAnnouncement(long sender, ZPackage pkg) {
