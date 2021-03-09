@@ -27,7 +27,7 @@ This guide was written with the idea that you are hosting a **dedicated** server
 <p>
   
 1. The client makes a request to the server with the information necessary for the request.
-2. The server reads the ZPackage sent by the client. It reads the ZPackage, validates the request.
+2. The server reads the ZPackage sent by the client. It reads the ZPackage and validates the request.
 
 **If Client Request Is Valid:**
 1. Sends a new package, or the package sent by the client, to the correct clients.
@@ -81,7 +81,7 @@ public static void RPC_RequestServerAnnouncement(long sender, ZPackage pkg)
 }
 ```
 
-This will give us a basic server validator and allow us to send the events to the client whether it's completing the request, or sending them an error. `0L` as our target makes our RPC message send to all clients. However! Since we call `0L` for the target from our server, we need to create a Mock client handler function for the server, but we will just make that an empty return. For consistency we will name this the same as our Client RPC function that we will make next! Add a function in the same **Server** `RPC` class and name it `RPC_EventServerAnnouncement`.
+This will give us a basic server validator and allow us to send the events to the client whether it's completing the request, or sending them an error. `0L` as our target makes our RPC message send to all clients. If we don't want to send to all players, it should be the sender ID or a players RPC id. However! Since we call `0L` for the target from our server, we need to create a Mock client handler function for the server, but we will just make that an empty return. For consistency we will name this the same as our Client RPC function that we will make next! Add a function in the same **Server** `RPC` class and name it `RPC_EventServerAnnouncement`.
 
 ```cs
 public static void RPC_EventServerAnnouncement(long sender, ZPackage pkg) {
